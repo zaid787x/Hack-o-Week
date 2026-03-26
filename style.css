@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    
+    /* --- NEW BACKGROUND SETTINGS --- */
+    background-image: url('symbiosis-bg.jpg'); /* Name of your image file */
+    background-size: cover; /* Ensures the image covers the whole screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+    /* Adds a dark transparent overlay so the background isn't too distracting */
+    background-color: rgba(0, 0, 0, 0.6); 
+    background-blend-mode: overlay;
+    /* ------------------------------- */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.chat-container {
+    width: 400px;
+    /* Made the chat window slightly transparent for a modern glass effect */
+    background: rgba(255, 255, 255, 0.95); 
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background: #c72027; /* Standard institutional red */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.chat-window {
+    height: 350px;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: transparent;
+}
+
+.msg {
+    padding: 10px 14px;
+    border-radius: 6px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user-msg {
+    background: #007bff;
+    color: white;
+    align-self: flex-end;
+}
+
+.bot-msg {
+    background: #e2e3e5;
+    color: black;
+    align-self: flex-start;
+}
+
+.input-area {
+    display: flex;
+    border-top: 1px solid #ccc;
+    background: white;
+}
+
+input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+button {
+    padding: 12px 20px;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover { background: #218838; }
