@@ -3,22 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Institutional Chatbot - Hack-O-Week</title>
+    <title>SITNAGPUR — AI Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Outfit&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css"> ```
+
+
+ 
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">Symbiosis Support Bot</div>
-        
-        <div class="chat-window" id="chatWindow">
-            <div class="msg bot-msg">Hello! I am your institutional assistant. How can I help you?</div>
-        </div>
-        
-        <div class="input-area">
-            <input type="text" id="userInput" placeholder="Type your query here...">
-            <button onclick="sendMessage()">Send</button>
-        </div>
+
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
+    <div class="dot-grid" aria-hidden="true"></div>
+
+    <div class="app-shell">
+
+        <!-- LEFT SIDEBAR -->
+        <aside class="left-panel">
+            <div class="brand-block">
+                <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="brand-text">
+                    <span class="brand-name">SIT</span><span class="brand-city">NAGPUR</span>
+                </div>
+                <div class="online-dot"></div>
+            </div>
+
+            <div class="panel-section">
+                <div class="panel-label">
+                    <i class="fas fa-clock-rotate-left"></i> Recent Sessions
+                    <button class="new-chat-btn" id="newChatBtn" title="New Chat"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="search-wrap">
+                    <i class="fas fa-magnifying-glass"></i>
+                    <input type="text" id="searchChats" placeholder="Search chats…" autocomplete="off">
+                </div>
+                <div class="chat-list" id="chatList"></div>
+            </div>
+
+            <div class="panel-section">
+                <div class="panel-label"><i class="fas fa-bolt"></i> Quick Access</div>
+                <div class="qlink-list">
+                    <a href="#" data-link="prospectus" class="qlink"><i class="fas fa-file-pdf"></i><span>Prospectus 2026</span></a>
+                    <a href="#" data-link="calendar" class="qlink"><i class="fas fa-calendar-days"></i><span>Academic Calendar</span></a>
+                    <a href="#" data-link="achievements" class="qlink"><i class="fas fa-award"></i><span>Achievements</span></a>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <span class="status-pill"><span class="pulse-ring"></span> AI Online 24/7</span>
+            </div>
+        </aside>
+
+        <!-- MAIN CHAT -->
+        <main class="chat-panel">
+            <header class="chat-topbar">
+                <div class="topbar-left">
+                    <div class="ai-avatar-sm"><i class="fas fa-robot"></i></div>
+                    <div class="topbar-info">
+                        <div class="topbar-title">SITNAGPUR AI Assistant</div>
+                        <div class="topbar-sub">Context-Aware &bull; Multi-Intent &bull; Always On</div>
+                    </div>
+                </div>
+                <div class="topbar-badges">
+                    <span class="tbadge live"><span class="dot"></span>Live</span>
+                    <span class="tbadge">Advanced AI</span>
+                </div>
+            </header>
+
+            <div class="messages-area" id="messagesArea"></div>
+
+            <div class="typing-indicator" id="typingIndicator" style="display:none;">
+                <div class="typing-dots"><span></span><span></span><span></span></div>
+                <span class="typing-text">AI is thinking…</span>
+            </div>
+
+            <div class="qa-strip" id="quickActions">
+                <button class="qa-pill quick-action-btn" data-query="admissions"><i class="fas fa-graduation-cap"></i> Admissions</button>
+                <button class="qa-pill quick-action-btn" data-query="courses"><i class="fas fa-book-open"></i> Courses</button>
+                <button class="qa-pill quick-action-btn" data-query="fees"><i class="fas fa-money-bill-wave"></i> Fees</button>
+                <button class="qa-pill quick-action-btn" data-query="exams"><i class="fas fa-calendar-days"></i> Exams</button>
+                <button class="qa-pill quick-action-btn" data-query="placement"><i class="fas fa-briefcase"></i> Placements</button>
+                <button class="qa-pill quick-action-btn" data-query="contact"><i class="fas fa-phone"></i> Contact</button>
+            </div>
+
+            <div class="input-dock">
+                <div class="input-wrap">
+                    <input type="text" id="userInput" placeholder="Ask anything about SITNAGPUR…" autocomplete="off">
+                    <button class="send-btn" id="sendButton" aria-label="Send">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="right-panel">
+            <div class="rp-section">
+                <div class="rp-label"><i class="fas fa-chart-line"></i> Live Analytics</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-comments"></i>
+                        <div class="stat-val" id="totalQueries">0</div>
+                        <div class="stat-lbl">Queries</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="stat-val" id="successRate">0%</div>
+                        <div class="stat-lbl">Success</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-fire"></i>
+                        <div class="stat-val" id="topTopic">—</div>
+                        <div class="stat-lbl">Top Topic</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-face-smile"></i>
+                        <div class="stat-val" id="avgSentiment">—</div>
+                        <div class="stat-lbl">Sentiment</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rp-section">
+                <div class="rp-label"><i class="fas fa-megaphone"></i> Announcements</div>
+                <div class="announcements-list" id="announcements">
+                    <div class="announcement-item urgent">
+                        <span class="announcement-badge urgent">URGENT</span>
+                        <p>Admissions closing March 31, 2026</p>
+                        <small>Last 5 days left</small>
+                    </div>
+                    <div class="announcement-item">
+                        <span class="announcement-badge">NEW</span>
+                        <p>Placement Drive: Microsoft on March 7</p>
+                        <small>Register by March 5</small>
+                    </div>
+                    <div class="announcement-item">
+                        <p>Mid-term exams starting March 10</p>
+                        <small>Hall tickets available</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rp-section">
+                <div class="rp-label"><i class="fas fa-chart-pie"></i> Topic Popularity</div>
+                <div class="chart-box">
+                    <canvas id="topicChart" width="220" height="180"></canvas>
+                </div>
+            </div>
+
+            <div class="rp-section">
+                <div class="rp-label"><i class="fas fa-headset"></i> Support Hours</div>
+                <div class="hours-list">
+                    <div class="hour-row"><span>Mon – Fri</span><span>9 AM – 6 PM</span></div>
+                    <div class="hour-row"><span>Saturday</span><span>10 AM – 4 PM</span></div>
+                    <div class="hour-row"><span>Sunday</span><span>Closed</span></div>
+                    <div class="hour-row accent-row"><span>AI Assistant</span><span>24 / 7</span></div>
+                </div>
+                <div class="emergency-badge">
+                    <i class="fas fa-phone-alt"></i> Emergency: +91 712 280 9999
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
